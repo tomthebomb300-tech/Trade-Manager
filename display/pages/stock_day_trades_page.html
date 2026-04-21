@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Stock Day Trades</title>
-
+        <link rel="stylesheet" href="../styles/stock_day_trades.css">
         <script src="../scripts/stock_day_trades.js"></script>
     </head>
     <body>
@@ -10,10 +10,10 @@
             
         </header>
         <div class="overallPerformance">
-            <div class="TotalPL">Total P&amp;L</div>
-            <div class="TotalWinPercentage">Total Win &percnt;</div>
-            <div class="TotalAverageWinLoss">Average Win &plus; Loss</div>
-            <div class="TotalProfitFactor">Profit Factor</div>
+            <div>P&amp;L $<p id="OverallPL">No Data</p></div>
+            <div>Win Rate: <p id="OverallWinPercentage">No Data</p>%</div>
+            <div>Avg Win / Avg Loss $<p id="OverallAverageWin">No Data</p>/ $<p id="OverallAverageLoss">No Data</p></div>
+            <div>Profit Factor: <p id="OverallProfitFactor"></p></div>
         </div>
     </body>
 </html>
