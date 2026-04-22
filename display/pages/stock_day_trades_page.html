@@ -4,6 +4,8 @@
         <title>Stock Day Trades</title>
         <link rel="stylesheet" href="../styles/stock_day_trades.css">
         <script src="../scripts/stock_day_trades.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     </head>
     <body>
         <header class="header">
@@ -15,5 +17,9 @@
             <div>Avg Win / Avg Loss $<p id="OverallAverageWin">No Data</p>/ $<p id="OverallAverageLoss">No Data</p></div>
             <div>Profit Factor: <p id="OverallProfitFactor"></p></div>
         </div>
+
+        <canvas id="dailyAccountBalance">
+
+        </canvas>
     </body>
 </html>

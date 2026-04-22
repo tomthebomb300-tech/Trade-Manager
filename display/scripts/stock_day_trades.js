@@ -21,6 +21,7 @@ window.onload = init;
 
 function init(){
     updateHeaders();
+    updateDailyAccountBalance();
 }
 
 function updateHeaders(){
@@ -38,5 +39,37 @@ function updateHeaders(){
     
     fetch('http://localhost:5000/get_profit_factor').then(res=>res.json())
     .then(pf=>{document.getElementById("OverallProfitFactor").textContent = pf});
-    
+}
+
+function updateDailyAccountBalance(){
+    fetch('http://localhost:5000/get_daily_PL').then(res=>res.json())
+    .then(data=>{
+        const labels = data.map(d => new Date(d.date));
+        const values = data.map(d => d.balance);
+        const ctx = document.getElementById('dailyAccountBalance');
+
+        console.log(data);
+        
+        new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+            label: 'Balance',
+            data: values,
+            borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+            x: {
+                type: 'time',
+                time: {
+                unit: 'day'
+                }
+            }
+            }
+        }
+        });
+    });
 }

@@ -1,3 +1,7 @@
 .overallPerformance p{
     display: inline;
 }
+
+body{
+    background-color: rgb(66, 63, 63);
+}

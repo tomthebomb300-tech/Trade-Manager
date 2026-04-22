@@ -32,5 +32,23 @@ def getProfitFactor(df):
     totalLosses = round(df[df['P&L'] < 0]['P&L'].sum(),2)*-1
     return round(totalProfits/totalLosses,2)
 
+def getDailyPL(df):
+    dates = df['Exit Date'].unique()
+    dates = sorted(dates)
+
+    dailyInfo = []
+    balance = 0
+    for date in dates:
+        balance += df[df['Exit Date'] == date]['P&L'].sum()
+        dailyInfo.append(
+            {
+                'date' : date,
+                'balance' : round(balance,2)
+            }
+        )
+    return dailyInfo
+
+        
+
 def startup():
     return loadDf("stockDayTrades.csv")

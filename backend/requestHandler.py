@@ -31,6 +31,10 @@ def get_average_loss():
 def get_profit_factor():
     return jsonify(getProfitFactor(df))
 
+@app.route('/get_daily_PL', methods=['GET'])
+def get_daily_PL():
+    return jsonify(getDailyPL(df))
+
 
 @app.route('/post_test', methods=['POST'])
 def post_test():
