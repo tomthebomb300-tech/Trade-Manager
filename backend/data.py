@@ -48,6 +48,33 @@ def getDailyPL(df):
         )
     return dailyInfo
 
+def getWeeklyDetails(df):
+    weekStart = dt.datetime(2026,1,1)
+    weekEnd = dt.datetime(2026,1,9)
+    currentDate = dt.datetime.today()
+    weeklyInfo = []
+    weekCounter = 1
+    runningProfit = 0
+    while(weekStart < currentDate):
+        trades = df[(df['Exit Date'] >= weekStart) & (df['Exit Date'] <= weekEnd)]
+        profit = trades['P&L'].sum()
+        runningProfit += profit
+        weekName = "Week "+str(weekCounter)
+        weeklyInfo.append(
+            {
+                'Name' : weekName,
+                'Profit' : round(profit,2),
+                'Running Profit' : round(runningProfit,2),
+                'Number Wins' : len(trades[trades['Outcome'] == 'Win']),
+                'Number Losses' : len(trades[trades['Outcome'] == 'Loss']),
+                'Start Date' : str(weekStart.date()),
+                'End Date' : str(weekEnd.date())
+            }
+        )
+        weekStart = weekEnd + dt.timedelta(days=3)
+        weekEnd = weekStart + dt.timedelta(days=4)
+        weekCounter += 1
+    return weeklyInfo
         
 
 def startup():

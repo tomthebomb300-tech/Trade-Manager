@@ -22,6 +22,7 @@ window.onload = init;
 function init(){
     updateHeaders();
     updateDailyAccountBalance();
+    weeklyInfo();
 }
 
 function updateHeaders(){
@@ -47,29 +48,70 @@ function updateDailyAccountBalance(){
         const labels = data.map(d => new Date(d.date));
         const values = data.map(d => d.balance);
         const ctx = document.getElementById('dailyAccountBalance');
-
-        console.log(data);
         
         new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-            label: 'Balance',
-            data: values,
-            borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-            x: {
-                type: 'time',
-                time: {
-                unit: 'day'
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                label: 'Balance',
+                data: values,
+                borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                    unit: 'day'
+                    }
+                }
                 }
             }
+        });
+    });
+}
+
+function weeklyInfo(){
+    fetch('http://localhost:5000/get_weekly_details').then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        const ctx = document.getElementById('weeklyBarChart').getContext('2d');
+
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.map(w => w.Name),
+                datasets: [{
+                    label: 'Profit',
+                    data: data.map(w => w.Profit),
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const d = data[context.dataIndex];
+                                return [
+                                    `Profit: ${d.Profit}`,
+                                    `Running Profit: ${d['Running Profit']}`,
+                                    `Wins: ${d['Number Wins']}`,
+                                    `Losses: ${d['Number Losses']}`,
+                                    `Start: ${d['Start Date']}`,
+                                    `End: ${d['End Date']}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
-        }
         });
     });
 }

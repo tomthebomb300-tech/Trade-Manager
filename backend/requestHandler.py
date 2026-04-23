@@ -35,12 +35,19 @@ def get_profit_factor():
 def get_daily_PL():
     return jsonify(getDailyPL(df))
 
+@app.route('/get_weekly_details', methods=['GET'])
+def get_weekly_details():
+    return jsonify(getWeeklyDetails(df))
 
 @app.route('/post_test', methods=['POST'])
 def post_test():
     data = request.json
     print("python got: ", data)
     return jsonify({"status": "success"})
+
+
+
+
 
 
 if __name__ == '__main__':
