@@ -1,7 +1,37 @@
-.overallPerformance p{
+.overallPerformance {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    background: #f5f6f8;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card {
+    padding: 20px;
+    background: #fff;
+    border-right: 1px solid #e5e7eb;
+}
+
+.card p {
+    color: #6b7280;
+    font: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 28px;
+    margin: 0;
     display: inline;
 }
 
+.chartCard {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
 body{
-    background-color: rgb(66, 63, 63);
+    background-color: black;
 }

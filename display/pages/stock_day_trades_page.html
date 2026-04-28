@@ -12,13 +12,13 @@
             
         </header>
         <div class="overallPerformance">
-            <div>P&amp;L $<p id="OverallPL">No Data</p></div>
-            <div>Win Rate: <p id="OverallWinPercentage">No Data</p>%</div>
-            <div>Avg Win / Avg Loss $<p id="OverallAverageWin">No Data</p>/ $<p id="OverallAverageLoss">No Data</p></div>
-            <div>Profit Factor: <p id="OverallProfitFactor"></p></div>
+            <div class="card"><p>P&amp;L</p> <h2>$</h2><h2 id="OverallPL">No Data</h2></div>
+            <div class="card"><p>Win Rate:</p> <h2 id="OverallWinPercentage">No Data</h2><h2>%</h2></div>
+            <div class="card"><p>Avg Win / Avg Loss</p> <h2>$</h2><h2 id="OverallAverageWin">No Data</h2> <h2>/ -$</h2><h2 id="OverallAverageLoss">No Data</h2></div>
+            <div class="card"><p>Profit Factor:</p> <h2 id="OverallProfitFactor"></h2></div>
         </div>
 
-        <canvas id="dailyAccountBalance"></canvas>
-        <canvas id="weeklyBarChart"></canvas>
+        <div class="chartCard"><canvas id="dailyAccountBalance"></canvas></div>
+        <div class="chartCard"><canvas id="weeklyBarChart"></canvas></div>
     </body>
 </html>

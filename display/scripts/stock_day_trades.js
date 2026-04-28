@@ -36,7 +36,7 @@ function updateHeaders(){
     .then(averageWin=>{document.getElementById("OverallAverageWin").textContent = averageWin});
 
     fetch('http://localhost:5000/get_average_loss').then(res=>res.json())
-    .then(averageLoss=>{document.getElementById("OverallAverageLoss").textContent = averageLoss});
+    .then(averageLoss=>{document.getElementById("OverallAverageLoss").textContent = averageLoss*-1});
     
     fetch('http://localhost:5000/get_profit_factor').then(res=>res.json())
     .then(pf=>{document.getElementById("OverallProfitFactor").textContent = pf});
@@ -56,17 +56,19 @@ function updateDailyAccountBalance(){
                 datasets: [{
                 label: 'Balance',
                 data: values,
-                borderWidth: 2
+                borderWidth: 2,
+                backgroundColor: 'black',
+                borderColor: 'white',
                 }]
             },
             options: {
                 scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                    unit: 'day'
+                    x: {
+                        type: 'time',
+                        time: {
+                        unit: 'day'
+                        }
                     }
-                }
                 }
             }
         });
@@ -84,8 +86,9 @@ function weeklyInfo(){
             data: {
                 labels: data.map(w => w.Name),
                 datasets: [{
-                    label: 'Profit',
+                    label: 'P&L',
                     data: data.map(w => w.Profit),
+                    backgroundColor: data.map(w => w.Profit >= 0 ? 'green' : 'red')
                 }]
             },
             options: {
