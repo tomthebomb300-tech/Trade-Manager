@@ -1,12 +1,15 @@
 import pandas as pd
 import datetime as dt
+import sqlite3
 
-def loadDf(filename):
-    df = pd.read_csv(filename, sep="\t")
-    df["Enter Date"] = pd.to_datetime(df["Enter Date"], format="%d-%b-%Y")
-    df["Enter Time"] = pd.to_datetime(df["Enter Time"], format="%H:%M").dt.time
-    df["Exit Date"] = pd.to_datetime(df["Exit Date"], format="%d-%b-%Y")
-    df["Exit Time"] = pd.to_datetime(df["Exit Time"], format="%H:%M").dt.time
+def loadDf():
+    conn = sqlite3.connect("trades.db")
+    df = pd.read_sql("SELECT * FROM trades", conn)
+    conn.close()
+    df["Enter Date"] = pd.to_datetime(df["Enter Date"])
+    df["Enter Time"] = pd.to_datetime(df["Enter Time"], format="%H:%M:%S.%f").dt.time
+    df["Exit Date"] = pd.to_datetime(df["Exit Date"])
+    df["Exit Time"] = pd.to_datetime(df["Exit Time"], format="%H:%M:%S.%f").dt.time
     return df
 
 def getProfitLoss(df):
@@ -78,4 +81,4 @@ def getWeeklyDetails(df):
         
 
 def startup():
-    return loadDf("stockDayTrades.csv")
+    return loadDf()
